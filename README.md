@@ -41,3 +41,10 @@ literally; we treat it as an error so silent corruption cannot slip through.
 
 - `decode(text: str) -> str` — decode escapes in the given string.
 - `DecodeError` — subclass of `ValueError`, raised on malformed input.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
